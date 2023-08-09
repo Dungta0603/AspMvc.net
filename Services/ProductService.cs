@@ -1,17 +1,18 @@
 using System.Collections.Generic;
 using App.Models;
 
-namespace demo1.Services
+namespace App.Services
 {
     public class ProductService : List<ProductModel>
     {
-        public ProductService() { 
-            this.AssRange(new ProductModel[]{
-                new ProductModel() {Id= 1, Name="iphone5 " , Price = "120000"},
-                new ProductModel() {Id= 1, Name="iphone4 " , Price = "130000"},
-                new ProductModel() {Id= 1, Name="iphone3 " , Price = "1045000"},
-                new ProductModel() {Id= 1, Name="iphone2 " , Price = "1055000"},
+        public ProductService()
+        {
+            this.AddRange(new ProductModel[] {
+                new ProductModel() { Id = 1, Name = "Iphone X", Price = 1000},
+                new ProductModel() { Id = 2, Name = "Samsung Abc", Price = 500},
+                new ProductModel() { Id = 3, Name = "Sony XYZ", Price = 800},
+                new ProductModel() { Id = 4, Name = "Nokia BCD", Price = 100},
             });
-        } 
+        }
     }
 }
