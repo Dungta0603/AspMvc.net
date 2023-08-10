@@ -1,27 +1,34 @@
-// using System.net;
-// using Microsoft.AspNetCore.Builder;
-// using Microsoft.AspNetCore.Http;
-// namespace demo1.ExtendMethods {
-//     public static class AppExtend
-//     {
-//         public static class AppStatusCodePage ( this IApplicationBuilder app){
-//              app.UseStatusCodePages(appError => {
-//                 appError.Run(async () => {
-//                     var respone = context.Response;
-//                     var code = respone.StartupCode;
+using System.Net;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Builder;
 
-//                     var context = @$"<html>
-//                     <head>
-//                     <meta charset='UTF-8'/>
-//                     <title>Looi {code}</title>
-//                     <body>
-//                         <p>Looi {code} - {(HttpStatusCode)code}</p>
-//                     </body>
-//                     </head>
-//                     </html>";
-//                     await respone.WriteAsync(context);
-//                 });
-//             });
-//         }
-//     }
-//     }
+namespace App.ExtendMethods
+{
+    public static class AppExtends
+    {
+        public static void AddStatusCodePage(this IApplicationBuilder app)
+        {
+            app.UseStatusCodePages(appError =>  {
+                appError.Run(async context => {
+                    var respone = context.Response;
+                    var code = respone.StatusCode;
+                    
+
+                    var content = @$"<html>
+                        <head>
+                            <meta charset='UTF-8' />
+                            <title>Lỗi {code}</title>
+                        </head>
+                        <body>
+                            <p style='color:red; font-size: 30px'>
+                                Có lỗi xảy ra: {code} - {(HttpStatusCode)code}
+                            </p>
+                        </body>
+                    </html>";
+
+                    await respone.WriteAsync(content);
+                });
+            }); //Code 400  - 599
+        }
+    }
+}
